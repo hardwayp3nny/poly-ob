@@ -39,10 +39,16 @@ async fn main() -> Result<()> {
             Ok(v) => {
                 let asset = v.get("asset_id").and_then(|x| x.as_str()).unwrap_or("");
                 let hash = v.get("hash").and_then(|x| x.as_str()).unwrap_or("");
-                let ts = v.get("timestamp").and_then(|x| x.as_str()).unwrap_or("");
+                let ts_str = v.get("timestamp").and_then(|x| x.as_str()).unwrap_or("");
+                let server_ms: i128 = ts_str.parse().unwrap_or(0);
+                let now_ms: i128 = chrono::Utc::now().timestamp_millis() as i128;
+                let latency = if server_ms > 0 { now_ms - server_ms } else { 0 };
                 let bids_len = v.get("bids").and_then(|x| x.as_array()).map(|a| a.len()).unwrap_or(0);
                 let asks_len = v.get("asks").and_then(|x| x.as_array()).map(|a| a.len()).unwrap_or(0);
-                println!("[{ts}] {asset} hash={hash} bids={bids_len} asks={asks_len}");
+                println!(
+                    "[srv_ts={}] {asset} hash={} bids={} asks={} latency_ms={}",
+                    ts_str, hash, bids_len, asks_len, latency
+                );
             }
             Err(_) => println!("{}", payload),
         }
