@@ -1,0 +1,21 @@
+# Client node configuration
+
+redis_url = "redis://127.0.0.1:6379"
+base_url = "https://clob.polymarket.com"
+
+# Full token universe to track (latest snapshot per token is always overwritten)
+tokens = [
+  "95878932656463672690011615708264789941769487376146347282594827413165904198274",
+  "85016582491891641891682825779153327926498303926960112812983326037762133247951",
+]
+
+# Fetch node TCP endpoints (ip:port). Each will listen on port 3000 by default
+fetch_nodes = [
+  "127.0.0.1:3000",
+  # "10.0.0.2:3000",
+]
+
+# How many seconds ahead to schedule slots (rolling window)
+plan_horizon_secs = 5
+
+

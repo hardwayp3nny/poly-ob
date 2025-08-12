@@ -1,0 +1,15 @@
+# Fetch node configuration
+
+redis_url = "redis://127.0.0.1:6379"
+base_url = "https://clob.polymarket.com"
+
+# Unique id for this fetch node
+node_id = "fetch-001"
+
+# Max requests per second for this node (client scheduler also enforces)
+capacity_rps = 20
+
+# TCP listening address for commands from the client
+bind_addr = "0.0.0.0:3000"
+
+
