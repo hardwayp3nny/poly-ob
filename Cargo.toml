@@ -5,6 +5,7 @@ members = [
   "crates/fetcher",
   "crates/viewer",
   "crates/printer",
+  "crates/bench",
 ]
 resolver = "2"
 
